@@ -23,6 +23,8 @@ public class Mapper {
 			obj.setCource(ob.getCourceName());
 			obj.setDuration(ob.getDuration());
 			obj.setFees(ob.getFees());
+			obj.setCollegeName(ob.getCollegeName());
+			obj.setMarks(ob.getMarks());
 			cources.add(obj);
 		}
 

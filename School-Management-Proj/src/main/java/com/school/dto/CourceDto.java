@@ -1,5 +1,7 @@
 package com.school.dto;
 
+import java.util.Map;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,4 +22,6 @@ public class CourceDto {
 	Integer duration;
 	String address;
 	Integer fees;
+	String collegeName;
+	Map<String,Float> marks;
 }

@@ -1,5 +1,7 @@
 package com.school.vo;
 
+import java.util.Map;
+
 import com.sun.istack.Nullable;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +23,9 @@ public class CourceVo {
 	Integer duration;
 	String address;
 	Integer fees;
+	String collegeName;
+	Map<String,Float> marks;
+	
 	
 
 }

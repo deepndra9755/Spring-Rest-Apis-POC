@@ -1,6 +1,7 @@
 package com.school.bo;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -34,6 +35,8 @@ public class Cource {
 	Integer duration;
 	String address;
 	Integer fees;
+	String collegeName;
+	String marks;
 	
 	/*
 	 * @ManyToOne(targetEntity =Customer.class,cascade = CascadeType.ALL,fetch =
@@ -49,12 +52,14 @@ public class Cource {
      Student student;	
 	
 
-	public Cource(String courceName, Integer duration, String address, Integer fees) {
+	public Cource(String courceName, Integer duration, String address, Integer fees,String college,String marks) {
 		super();
 		this.courceName = courceName;
 		this.duration = duration;
 		this.address = address;
 		this.fees = fees;
+		this.collegeName=college;
+		this.marks=marks;
 	
 	}
 

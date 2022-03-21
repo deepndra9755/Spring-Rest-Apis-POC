@@ -7,6 +7,7 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,17 +36,32 @@ public class StudentResource {
 	@PostMapping("/student")
 	public StudentVo insertStudent(@RequestBody StudentVo vo) throws Exception {
 
+		try
+		{
 		StudentDto dto = Mapper.toStudentDto(vo);
 		StudentVo studentVo = service.insertStudent(dto);
 		return studentVo;
+		}
+		catch(Exception e)
+		{
+		throw e;	
+		}
+		
 	}
 
 	@GetMapping("/student/{id}")
 	public StudentVo getStudentById(@PathVariable("id") String id) throws Exception {
 
 		// service.exist(id);
+		try
+		{
 		StudentVo vo = service.findById(id);
 		return vo;
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
 	}
 
 	@GetMapping("/students")
@@ -75,8 +91,9 @@ public class StudentResource {
 	/*
 	 * public ResponseEntity<HttpStatus> deleteStudent(@PathVariable int id){ try {
 	 * 
-	 * return new ResponseEntity<>(HttpStatus.OK); }catch(Exception e){ return new
+	 * return new ResponseEntity<>(HttpStatus.OK); } catch(Exception e){ return new
 	 * ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); } }
 	 */
+	 
 
 }

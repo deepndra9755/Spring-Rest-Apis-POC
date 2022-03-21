@@ -1,7 +1,10 @@
 package com.school.service.mapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
@@ -21,7 +24,8 @@ public class Mapper {
 		List<Cource> obj = new ArrayList<Cource>();
 
 		for (CourceDto ob : dto.getDto()) {
-			Cource crs = new Cource(ob.getCource(), ob.getDuration(), ob.getAddress(), ob.getFees());
+			Cource crs = new Cource(ob.getCource(), ob.getDuration(), ob.getAddress(), ob.getFees(),
+					ob.getCollegeName(),toStringMarks(ob.getMarks()));
 			obj.add(crs);
 		}
 
@@ -33,14 +37,42 @@ public class Mapper {
 		List<CourceVo> list = new ArrayList<CourceVo>();
 
 		for (Cource ob : stud.getCource()) {
-			CourceVo obj = new CourceVo(ob.getId(), ob.getCourceName(), ob.getDuration(), ob.getAddress(),
-					ob.getFees());
+			CourceVo obj = new CourceVo(ob.getId(), ob.getCourceName(), ob.getDuration(), ob.getAddress(), ob.getFees(),
+					ob.getCollegeName(), toMap(ob.getMarks()));
 			list.add(obj);
 		}
 
-		return new StudentVo(stud.getEnrollment(), stud.getName(), stud.getLastName(),
-				stud.getState(), stud.getCast(), stud.getCountry(), stud.getMarried(), list);
+		return new StudentVo(stud.getEnrollment(), stud.getName(), stud.getLastName(), stud.getState(), stud.getCast(),
+				stud.getCountry(), stud.getMarried(), list);
 
 	}
 
+	public static String toStringMarks(Map<String, Float> obj) {
+
+		String str = obj.entrySet().stream().map(e -> e.getKey() + ":" + e.getValue()).collect(Collectors.joining(","));
+
+		return str;
+
+	}
+
+	public static Map<String, Float> toMap(String str) {
+		Map<String, Float> obj = new HashMap<String, Float>();
+
+		String values[] = str.split(str);
+		for (String part : values) {
+
+			// split the student data by colon to get the
+			// name and roll number
+			String stuData[] = part.split(":");
+
+			String subject = stuData[0].trim();
+			String marks = stuData[1].trim();
+
+			// Add to map
+			obj.put(subject, Float.parseFloat(marks));
+
+		}
+
+		return obj;
+	}
 }
